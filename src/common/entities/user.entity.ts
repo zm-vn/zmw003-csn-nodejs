@@ -35,6 +35,7 @@ export class User extends CustomBase {
   getPayload(): UserPayload {
     return {
       id: this.id,
+      username: this.username,
       role: this.role,
     }
   }
