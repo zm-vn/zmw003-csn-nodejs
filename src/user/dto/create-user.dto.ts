@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsDateString, IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -9,14 +10,14 @@ export class CreateUserDto {
   email: string
 
   @IsNotEmpty()
-  @IsEmail()
   password: string
 
   @IsOptional()
   phone: string
 
   @IsOptional()
-  dob: string
+  @IsDateString()
+  dob: Date
 
   @IsOptional()
   avatar: string
