@@ -1,4 +1,4 @@
-import { BeforeCreate, Entity, Property } from '@mikro-orm/core';
+import { BeforeCreate, Entity, Index, Property } from '@mikro-orm/core';
 import { CustomBase } from './base/custom-base.entity';
 import { Role } from '../enums/role.enum';
 import { hashSync } from 'bcrypt';
@@ -6,7 +6,7 @@ import { UserPayload } from '../types/user-payload';
 
 @Entity({tableName: 'users'})
 export class User extends CustomBase {
-  @Property()
+  @Property({unique: true})
   username: string
 
   @Property({hidden: true})
@@ -24,7 +24,7 @@ export class User extends CustomBase {
   @Property({nullable: true})
   dob?: Date
 
-  @Property()
+  @Property({type: "int"})
   role: Role = Role.User
 
   @BeforeCreate()
