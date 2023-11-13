@@ -4,6 +4,7 @@ import { User } from '../common/entities/user.entity';
 import { EntityManager, EntityRepository, wrap } from '@mikro-orm/core';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Role } from '../common/enums/role.enum';
 
 @Injectable()
 export class UserService {
@@ -18,6 +19,9 @@ export class UserService {
 
   async create(dto: CreateUserDto) {
     const user = this.userEntityRepository.create(dto)
+    if (Boolean(dto.isEditor)) {
+      user.role = Role.Editor
+    }
     await this.em.persistAndFlush(user)
     return user
   }

@@ -21,4 +21,7 @@ export class CreateUserDto {
 
   @IsOptional()
   avatar: string
+
+  @IsOptional()
+  isEditor?: boolean
 }
